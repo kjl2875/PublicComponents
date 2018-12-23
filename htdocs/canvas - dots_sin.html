@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<style>
+			canvas {
+				border: 1px solid gray;
+			}
+			
+			.browserinfo {
+				font-size: 5px;
+			}
+		</style>
+		<script type="text/javascript" src="lib/jquery/jquery-3.3.1.min.js"></script>
+		<script>
+			var data = {
+				canvas: {
+					width: 1000,
+					height: 500,
+					object: null
+				},
+				context: null
+			};
+			
+			$(document).ready(function() {
+				data.canvas.object = $('#main_canvas')[0];
+				data.canvas.object.width = data.canvas.width;
+				data.canvas.object.height = data.canvas.height;
+				
+				data.context = data.canvas.object.getContext("2d");
+				
+				canvasUpdate();
+			});
+			
+			function canvasUpdate()
+			{
+				var ctx = data.context;
+				var c = data.cursor;
+				
+				ctx.clearRect(0,0,data.canvas.width,data.canvas.height);
+				ctx.fillStyle = "#FF0000";
+				
+				var y_max = data.canvas.height / 2;
+				var x_max = data.canvas.width / 2;
+				for( x=0; x<=x_max; x++ )
+				{
+					var y = y_max - Math.sin(x*Math.PI/x_max)*y_max;
+					
+					ctx.beginPath();
+					ctx.arc(x, y, 1, 0, 2 * Math.PI);
+					ctx.fill();
+				}
+				
+				for( x=0; x<=x_max; x++ )
+				{
+					var y = y_max - Math.sin((x+x_max)*Math.PI/x_max)*y_max;
+
+					ctx.beginPath();
+					ctx.arc(x + x_max, y, 1, 0, 2 * Math.PI);
+					ctx.fill();
+				}
+				
+			}
+			
+		</script>
+	</head>
+	<body>
+		<canvas id='main_canvas'></canvas>
+		<p class='browserinfo'>Google Chrome Version 71.0.3578.98</p>
+	</body>
+</html>
