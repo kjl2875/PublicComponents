@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<style>
+			canvas {
+				border: 1px solid gray;
+			}
+			
+			.browserinfo {
+				font-size: 5px;
+			}
+		</style>
+		<script type="text/javascript" src="lib/jquery/jquery-3.3.1.min.js"></script>
+		<script>
+			var data = {
+				canvas: {
+					width: 500,
+					height: 500,
+					updateInterval: 1000/60,
+					object: null
+				},
+				context: null,
+				cursor: {
+					x: 50,
+					y: 50,
+					offset_txt: {
+						x: 15,
+						y: -15,
+						font: "20px Arial"
+					}
+				}
+			};
+			
+			$(document).ready(function() {
+				data.canvas.object = $('#main_canvas')[0];
+				data.canvas.object.width = data.canvas.width;
+				data.canvas.object.height = data.canvas.height;
+				
+				data.context = data.canvas.object.getContext("2d");
+				
+				canvasUpdate();
+				setInterval(canvasUpdate,data.canvas.updateInterval);
+			});
+			
+			$(window).on('keydown',function(evt) {
+				var k = evt.key.toUpperCase();
+				
+				switch( k )
+				{
+				case 'W':
+					data.cursor.y -= 10;
+					if( data.cursor.y < 0 ) {
+						data.cursor.y = 0;
+					}
+					break;
+				case 'S':
+					data.cursor.y += 10;
+					if( data.cursor.y > data.canvas.height ) {
+						data.cursor.y = data.canvas.height;
+					}
+					break;
+				case 'A':
+					data.cursor.x -= 10;
+					if( data.cursor.x < 0 ) {
+						data.cursor.x = 0;
+					}
+					break;
+				case 'D':
+					data.cursor.x += 10;
+					if( data.cursor.x > data.canvas.width ) {
+						data.cursor.x = data.canvas.width;
+					}
+					break;
+				}
+			});
+			
+			function canvasUpdate()
+			{
+				var ctx = data.context;
+				var c = data.cursor;
+				
+				ctx.clearRect(0,0,data.canvas.width,data.canvas.height);
+					
+				ctx.fillStyle = "#FF0000";
+				ctx.beginPath();
+				ctx.arc(c.x, c.y, 20, 0, 2 * Math.PI);
+				ctx.stroke();
+				ctx.fill();
+				
+				ctx.font = c.offset_txt.font;
+				ctx.fillText("("+c.x+","+c.y+")", c.x+c.offset_txt.x, c.y+c.offset_txt.y);
+			}
+			
+		</script>
+	</head>
+	<body>
+		<p>Move Cursor: W,A,S,D</p>
+		<canvas id='main_canvas'></canvas>
+		<p class='browserinfo'>Google Chrome Version 71.0.3578.98</p>
+	</body>
+</html>
