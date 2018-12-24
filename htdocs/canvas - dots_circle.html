@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<style>
+			canvas {
+				border: 1px solid gray;
+			}
+			
+			.browserinfo {
+				font-size: 5px;
+			}
+		</style>
+		<script type="text/javascript" src="lib/jquery/jquery-3.3.1.min.js"></script>
+		<script>
+			var data = {
+				canvas: {
+					width: 1000,
+					height: 1000,
+					object: null
+				},
+				context: null
+			};
+			
+			$(document).ready(function() {
+				data.canvas.object = $('#main_canvas')[0];
+				data.canvas.object.width = data.canvas.width;
+				data.canvas.object.height = data.canvas.height;
+				
+				data.context = data.canvas.object.getContext("2d");
+				
+				canvasUpdate();
+			});
+			
+			function canvasUpdate()
+			{
+				var ctx = data.context;
+				var c = data.cursor;
+				
+				ctx.clearRect(0,0,data.canvas.width,data.canvas.height);
+				ctx.fillStyle = "#FF0000";
+				
+				var r = 500;
+				var center = {
+					x: data.canvas.width / 2,
+					y: data.canvas.height / 2
+				};
+				for( deg=0; deg<360; deg++ )
+				{
+					var x = r * Math.cos(deg*2*Math.PI/360);
+					var y = r * Math.sin(deg*2*Math.PI/360);
+					
+					ctx.beginPath();
+					ctx.arc(x+center.x, y+center.y, 1, 0, 2 * Math.PI);
+					ctx.fill();
+				}
+			}
+			
+		</script>
+	</head>
+	<body>
+		<canvas id='main_canvas'></canvas>
+		<p class='browserinfo'>Google Chrome Version 71.0.3578.98</p>
+	</body>
+</html>
