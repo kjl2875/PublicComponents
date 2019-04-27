@@ -1,4 +1,4 @@
-package com.github.kjl2875;
+package com.github.kjl2875.Components;
 
 import java.net.URL;
 
