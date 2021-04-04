@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<!-- 나는 주석이다. 브라우저 화면에서는 보이지 않음. -->
+<!-- <!DOCTYPE html>: DTD(Document Type Definition) -->
+<html>
+	<!-- <head>: HTML문서의 속성 -->
+	<head>
+		<meta charset="UTF-8">
+		<title>나는 브라우저 제목이다</title>
+		<!-- 외부 javascript 불러오기 -->
+		<script type="text/javascript" src="lib/jquery/jquery-3.3.1.min.js"></script>
+		<!-- 외부 css 불러오기 -->
+		<!-- <link rel="stylesheet" type="text/css" href="samples.css"> -->
+		<!-- style(css) -->
+		<style>
+			[class=padding10] {
+				padding: 10px;
+			}
+			
+			[class=padding20] {
+				padding: 20px;
+			}
+			
+			.padding30 {
+				padding: 30px;
+			}
+			
+			.size100 {
+				width: 100px;
+				height: 100px;
+			}
+			
+			.size200 {
+				width: 200px;
+				height: 200px;
+			}
+			
+			.size400 {
+				width: 400px;
+				height: 400px;
+			}
+			
+			.border {
+				border: 2px solid black;
+			}
+			
+			.custom-class01 {
+				padding: 10px;
+				margin: 10px;
+			}
+			
+			.custom-class02 {
+				padding: 10px;
+				margin: 10px 0 0 0;
+			}
+			
+			.custom-class03 {
+				padding: 10px;
+				margin: 0 0 10px 0;
+			}
+			
+			.custom-class04 {
+				padding: 10px;
+				margin: 0 0 0 10px;
+			}
+			
+			.fontsize01 {
+				font-size: 40px;
+			}
+		</style>
+		<script>
+			$(document).ready(function() {
+				var css_selector = '';
+				css_selector = '[id=btnGetRadio01]';
+				css_selector = '#btnGetRadio01';
+				
+				$(css_selector).click(function() {
+				//$('#btnGetRadio01').click(function() {
+					var value = $('[name=radio01]').val();
+					alert('radio01값 얻기 결과 = ' + value);
+				});
+			});
+		</script>
+	</head>
+	<!-- <body>: HTML문서의 모양 -->
+	<body>
+		<!-- h1 ~ h6 -->
+		<!-- W3C HTML 스팩에서 제외됨 -->
+		<!--
+		<h1>큰제목</h1>
+		<h2>작은제목</h2>
+		<h3>더작은제목</h3>
+		<h4>더더작은제목</h4>
+		<h5>더더작은제목</h5>
+		<h6>더더더작은제목</h6>
+		-->
+		
+		<!-- button -->
+		<br><br> <!-- 줄바꿈(ENTER) -->
+		<button>나는 버튼이다</button>
+		<br><br>
+		<button class="padding10">나는 padding10 버튼이다</button>
+		<br><br>
+		<button class="padding20">나는 padding20 버튼이다</button>
+		<button style="padding: 30px;">나는 padding20 버튼이다</button>
+		<br><br>
+		<button class="padding30">나는 padding30 버튼이다</button>
+		<!-- <hr>: 가로줄 -->
+		<hr>
+		<!-- div -->
+		<div class="size200 border">SIZE200 + border</div>
+		<br>
+		<div class="size400 border">SIZE400 + border</div>
+		<br>
+		<div class="border">
+			<button class="custom-class01">padding10+margin10</button>
+		</div>
+		<div class="border">
+			<button class="custom-class02">padding10+up-margin10</button>
+		</div>
+		<div class="border">
+			<button class="custom-class03">padding10+down-margin10</button>
+		</div>
+		<div class="border">
+			<button class="custom-class04">padding10+left-margin10</button>
+		</div>
+		<!-- table -->
+		<table border="1">
+			<thead>
+				<tr>
+					<th>thead-tr1-th1</th>
+					<th>thead-tr1-th2</th>
+					<th>thead-tr1-th3</th>
+				</tr>
+				<tr>
+					<th colspan="2">thead-tr2-th1</th>
+					<th>thead-tr2-th3</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>tbody-tr1-td1</td>
+					<td>tbody-tr1-td2</td>
+					<td>tbody-tr1-td3</td>
+				</tr>
+				<tr>
+					<td rowspan="3">tbody-tr2-td1</td>
+					<td>tbody-tr2-td2</td>
+					<td>tbody-tr2-td3</td>
+				</tr>
+				<tr>
+					<td>tbody-tr3-td1</td>
+					<td>tbody-tr3-td2</td>
+				</tr>
+				<tr>
+					<td>tbody-tr4-td1</td>
+					<td>tbody-tr4-td2</td>
+				</tr>
+			</tbody>
+			<tfoot>
+				<tr>
+					<th>tfoot-tr1-th1</th>
+					<th>tfoot-tr1-th2</th>
+					<th>tfoot-tr1-th3</th>
+				</tr>
+			</tfoot>
+		</table>
+		<!-- input -->
+		<input type="range" min="0" max="100" value="30">
+		<span>input[type=range,min=0,max=100,value=30]</span>
+		<br>
+		<span>input[type=radio,name=radio01]</span>
+		<br>
+		<span class="fontsize01">1번:</span>
+		<input type="radio" name="radio01" value="1번" class="size100">
+		<br>
+		<span class="fontsize01">2번:</span>
+		<input type="radio" name="radio01" value="2번" class="size100">
+		<br>
+		<span class="fontsize01">3번:</span>
+		<input type="radio" name="radio01" value="3번" class="size100">
+		<br>
+		<button class="padding20" id="btnGetRadio01">RADIO 01값 얻기</button>
+	</body>
+</html>
