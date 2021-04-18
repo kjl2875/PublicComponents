@@ -66,9 +66,54 @@
 			.fontsize01 {
 				font-size: 40px;
 			}
+			
+			/* table01 */
+			.table01 {
+				border: 1px solid black;
+			}
+			
+			.table01 th {
+				border: 1px solid black;
+				text-align: left;
+				font-size: 14px;
+			}
+			
+			.table01 > tbody > tr:nth-child(2n) {
+				background-color: #EFEFEF;
+			}
+			
+			.table01 > tbody > tr:nth-child(2n-1) {
+				background-color: #DFEFDF;
+			}
+			
+			.table01 td {
+				border: 1px dashed black;
+				font-size: 12px;
+			}
+			
+			.table01 > thead > tr > th:nth-child(1) {
+				width: 50px;
+			}
+			
+			.table01 > thead > tr > th:nth-child(2) {
+				width: 150px;
+			}
+			
+			.table01 > thead > tr > th:nth-child(3) {
+				width: 150px;
+			}
+			
+			.table01 > thead > tr > th:nth-child(4) {
+				width: 50px;
+			}
+			
+			.table01 > thead > tr > th:nth-child(5) {
+				width: 150px;
+			}
 		</style>
 		<script>
-			$(document).ready(function() {
+			$(document).ready(function() { // Call It First after html document is ready.
+			
 				var css_selector = '';
 				css_selector = '[id=btnGetRadio01]';
 				css_selector = '#btnGetRadio01';
@@ -78,7 +123,64 @@
 					var value = $('[name=radio01]').val();
 					alert('radio01값 얻기 결과 = ' + value);
 				});
+				
+				jstable01Init();
 			});
+			
+			function jstable01Init()
+			{
+				/// JavaScript data값 초기화
+				
+				var data = [];
+				data.push({
+					fullname: 'Bill Gates',
+					position: 'Founder Microsoft',
+					salary: '1000',
+					type: 'Company Founder'
+				});
+				data.push({
+					fullname: 'Steave Jobs',
+					position: 'Founder Apple',
+					salary: '1200',
+					type: 'Company Founder'
+				});
+				data.push({
+					fullname: 'Larry Page',
+					position: 'Founder Google',
+					salary: '1100',
+					type: 'Company Founder'
+				});
+				data.push({
+					fullname: 'Mark Zuckeberg',
+					position: 'Founder Facebook',
+					salary: '1300',
+					type: 'Company Founder'
+				});
+				
+				/// table태그이름 이면서, id값이jstable01인 태그에다가 내용 채워넣기.
+				
+				var table = $('table#jstable01');
+				$(data).each(function(i,row) {
+					var tr = $('<tr></tr>');
+					var number = i+1;
+					
+					tr.append($('<td></td>').text(number)         );
+					tr.append($('<td></td>').text(row.fullname)   );
+					tr.append($('<td></td>').text(row.position)   );
+					tr.append($('<td></td>').text('$'+row.salary) );
+					tr.append($('<td></td>').text(row.type)       );
+					
+					table.find('tbody').append(tr);
+				});
+				
+				/// Total Expense값 채워넣기
+				
+				var total_salary = 0;
+				$(data).each(function(i,row) {
+					total_salary = total_salary + parseFloat(row.salary);
+				});
+				table.find('tfoot').find('th').eq(1).text('$'+total_salary);
+			}
 		</script>
 	</head>
 	<!-- <body>: HTML문서의 모양 -->
@@ -101,7 +203,7 @@
 		<button class="padding10">나는 padding10 버튼이다</button>
 		<br><br>
 		<button class="padding20">나는 padding20 버튼이다</button>
-		<button style="padding: 30px;">나는 padding20 버튼이다</button>
+		<button style="padding: 20px;">나는 padding20 버튼이다</button>
 		<br><br>
 		<button class="padding30">나는 padding30 버튼이다</button>
 		<!-- <hr>: 가로줄 -->
@@ -180,5 +282,124 @@
 		<input type="radio" name="radio01" value="3번" class="size100">
 		<br>
 		<button class="padding20" id="btnGetRadio01">RADIO 01값 얻기</button>
+		
+		<hr>
+		
+		<H3>HTML</H3>
+		<table border="1">
+			<thead>
+				<tr>
+					<th>No.</th>
+					<th>Full Name</th>
+					<th>Position</th>
+					<th>Salary</th>
+					<th>Type</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>1</td>
+					<td>Bill Gates</td>
+					<td>Founder Microsoft</td>
+					<td>$1000</td>
+					<td rowspan="4">Company Founder</td>
+				</tr>
+				<tr>
+					<td>2</td>
+					<td>Steave Jobs</td>
+					<td>Founder Apple</td>
+					<td>$1200</td>
+				</tr>
+				<tr>
+					<td>3</td>
+					<td>Larry Page</td>
+					<td>Founder Google</td>
+					<td>$1100</td>
+				</tr>
+				<tr>
+					<td>4</td>
+					<td>Mark Zuckeberg</td>
+					<td>Founder Facebook</td>
+					<td>$1300</td>
+				</tr>
+			</tbody>
+			<tfoot>
+				<tr>
+					<th colspan="3">Total Expense:</th>
+					<th>$4600</th>
+					<th></th>
+				</tr>
+			</tfoot>
+		</table>
+		
+		<H3>HTML+CSS</H3>
+		<table class="table01">
+			<thead>
+				<tr>
+					<th>No.</th>
+					<th>Full Name</th>
+					<th>Position</th>
+					<th>Salary</th>
+					<th>Type</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>1</td>
+					<td>Bill Gates</td>
+					<td>Founder Microsoft</td>
+					<td>$1000</td>
+					<td rowspan="4">Company Founder</td>
+				</tr>
+				<tr>
+					<td>2</td>
+					<td>Steave Jobs</td>
+					<td>Founder Apple</td>
+					<td>$1200</td>
+				</tr>
+				<tr>
+					<td>3</td>
+					<td>Larry Page</td>
+					<td>Founder Google</td>
+					<td>$1100</td>
+				</tr>
+				<tr>
+					<td>4</td>
+					<td>Mark Zuckeberg</td>
+					<td>Founder Facebook</td>
+					<td>$1300</td>
+				</tr>
+			</tbody>
+			<tfoot>
+				<tr>
+					<th colspan="3">Total Expense:</th>
+					<th>$4600</th>
+					<th></th>
+				</tr>
+			</tfoot>
+		</table>
+		
+		<H3>HTML+CSS+JS</H3>
+		<table class="table01" id="jstable01">
+			<thead>
+				<tr>
+					<th>No.</th>
+					<th>Full Name</th>
+					<th>Position</th>
+					<th>Salary</th>
+					<th>Type</th>
+				</tr>
+			</thead>
+			<tbody>
+				<!-- Load From JavaScript -->
+			</tbody>
+			<tfoot>
+				<tr>
+					<th colspan="3">Total Expense:</th>
+					<th>$4600</th>
+					<th></th>
+				</tr>
+			</tfoot>
+		</table>
 	</body>
 </html>
